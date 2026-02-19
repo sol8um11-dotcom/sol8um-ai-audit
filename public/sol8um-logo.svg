@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 700" width="400" height="700">
+  <defs>
+    <linearGradient id="sol8umGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2B2BFF"/>
+      <stop offset="50%" stop-color="#1B6BFF"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+    <linearGradient id="sol8umGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#2B2BFF"/>
+    </linearGradient>
+    <!-- Mask to create the diamond cut-outs at the intersection -->
+    <mask id="eightMask">
+      <rect width="400" height="700" fill="white"/>
+      <!-- Diamond cut-out in the center where circles overlap -->
+      <polygon points="200,280 240,340 200,400 160,340" fill="black"/>
+    </mask>
+  </defs>
+
+  <g mask="url(#eightMask)">
+    <!-- Top circle of the 8 -->
+    <circle cx="200" cy="190" r="160" fill="none" stroke="url(#sol8umGrad)" stroke-width="48" stroke-linecap="round"/>
+    <!-- Bottom circle of the 8 -->
+    <circle cx="200" cy="510" r="160" fill="none" stroke="url(#sol8umGrad2)" stroke-width="48" stroke-linecap="round"/>
+  </g>
+</svg>
