@@ -50,9 +50,34 @@ export default function ResultsView({ result, userName, businessName, onRestart 
   const handleEmailReport = async () => {
     if (!email || !email.includes("@")) return;
     setEmailSending(true);
-    // Simulate sending — in production, this would call an API endpoint
-    await new Promise((r) => setTimeout(r, 1500));
-    setEmailSent(true);
+    try {
+      const res = await fetch("/api/send-report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          userName,
+          businessName,
+          sectorName: result.sectorName,
+          overallScore: result.overallScore,
+          aiReadinessLevel: result.aiReadinessLevel,
+          estimatedMonthlySavings: result.estimatedMonthlySavings,
+          topSolutions: result.topSolutions,
+          quickWins: result.quickWins,
+          priorityActions: result.priorityActions,
+        }),
+      });
+      if (res.ok) {
+        setEmailSent(true);
+      } else {
+        const err = await res.json();
+        console.error("Email send failed:", err);
+        alert("Failed to send email. Please try again.");
+      }
+    } catch (err) {
+      console.error("Email send error:", err);
+      alert("Something went wrong. Please try again.");
+    }
     setEmailSending(false);
   };
 
